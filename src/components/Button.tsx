@@ -6,12 +6,14 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   classNames?: string;
 }
 
-const Button = ({ children, classNames = '', ...restProps }: ButtonProps) => {
+const Button = ({ children, classNames = '', disabled, ...restProps }: ButtonProps) => {
   return (
     <button
       {...restProps}
+      disabled={disabled}
       className={clsx(
         'bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded',
+        disabled ? 'opacity-50 cursor-not-allowed' : '',
         classNames,
       )}
     >

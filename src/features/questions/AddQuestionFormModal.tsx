@@ -45,6 +45,13 @@ const AddQuestionFormModal = ({
   onSubmit,
 }: AddQuestionFormModalProps) => {
   const [state, setState] = useState<StateProps>({ ...initState });
+  const isValid =
+    !!state.question &&
+    !!state.answer &&
+    !!state.option1 &&
+    !!state.option2 &&
+    !!state.option3 &&
+    !!state.option4;
 
   useEffect(() => {
     if (selectedQuestion) {
@@ -132,8 +139,8 @@ const AddQuestionFormModal = ({
           />
         </form>
       </Modal.Body>
-      <Modal.Footer className="w-full flex justify-end">
-        <Button type="button" onClick={handleSubmit}>
+      <Modal.Footer className="w-full flex justify-end !p-4">
+        <Button type="button" onClick={handleSubmit} disabled={!isValid}>
           {isUpdate ? 'Update' : 'Add'} Question
         </Button>
       </Modal.Footer>

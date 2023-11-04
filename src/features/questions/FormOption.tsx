@@ -1,6 +1,7 @@
 import { ChangeEvent } from 'react';
 
 interface FormOptionProps {
+  required?: boolean;
   label: string;
   value: string;
   name: string;
@@ -12,6 +13,7 @@ const FormOption = ({
   label,
   value,
   name,
+  required = false,
   placeholder = 'Enter value here',
   onChange,
 }: FormOptionProps) => (
@@ -27,6 +29,7 @@ const FormOption = ({
       value={value}
       onChange={onChange}
       placeholder={placeholder}
+      required={required}
     />
   </div>
 );
