@@ -10,10 +10,10 @@ import NoData from '~/components/NoData';
 import QuestionsList from './QuestionsList';
 
 const UserAnswers: React.FC = () => {
-  const { questions, handleStateChange, showResult } = useContext(AppContext);
+  const { questions, handleStateChange, showResult, userType, answers } = useContext(AppContext);
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [checkedOption, setCheckedOption] = useState(0);
-  const [answers, setAnswers] = useState<Question[]>([]);
+  const [newAnswers, setNewAnswers] = useState<Question[]>([]);
   const [modalToggle, setModalToggle] = useToggle(false);
 
   const handleQuestionNextChange = () => {
@@ -22,13 +22,13 @@ const UserAnswers: React.FC = () => {
   };
 
   const handleQuestionSubmit = () => {
-    handleStateChange(answers, 'answers');
+    handleStateChange(newAnswers, 'answers');
     setModalToggle();
   };
 
   const handleAnswerChange = (selectQuestion: Question, newAnswerId: number) => {
-    const updatedAnswers = [...answers];
-    const existingIndex = answers.findIndex((answer) => answer.id === selectQuestion.id);
+    const updatedAnswers = [...newAnswers];
+    const existingIndex = newAnswers.findIndex((answer) => answer.id === selectQuestion.id);
 
     if (existingIndex !== -1) {
       updatedAnswers[existingIndex] = { ...selectQuestion, selectedAnswer: newAnswerId };
@@ -37,7 +37,7 @@ const UserAnswers: React.FC = () => {
     }
 
     setCheckedOption(newAnswerId);
-    setAnswers(updatedAnswers);
+    setNewAnswers(updatedAnswers);
   };
 
   const handleShowResults = () => {
@@ -45,12 +45,12 @@ const UserAnswers: React.FC = () => {
     setModalToggle();
     setCurrentQuestion(0);
     setCheckedOption(0);
-    setAnswers([]);
+    setNewAnswers([]);
   };
 
   return (
     <>
-      {showResult ? (
+      {showResult || userType === 'admin' ? (
         <Results />
       ) : (
         <Container>
