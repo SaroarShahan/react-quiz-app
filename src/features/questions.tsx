@@ -1,36 +1,32 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useContext, useState } from 'react';
+import { AppContext } from '~/context/appContext';
 
-interface Question {
-  id: number;
-  question: string;
-}
-
-const Questions: React.FC = () => {
-  const initialQuestions: Question[] = [
-    { id: 1, question: 'What is the capital of France?' },
-    { id: 2, question: 'Who is the author of "To Kill a Mockingbird"?' },
-  ];
-  const [questions, setQuestions] = useState<Question[]>(
-    JSON.parse(localStorage.getItem('questions')!) || initialQuestions,
-  );
+const AdminQuestions: React.FC = () => {
+  const { questions } = useContext(AppContext);
+  const [newQuestions, setNewQuestions] = useState<Question[]>(questions);
   const [newQuestion, setNewQuestion] = useState<string>('');
 
   const addQuestion = () => {
     if (newQuestion) {
       const updatedQuestions: Question[] = [
-        ...questions,
-        { id: questions.length + 1, question: newQuestion },
+        ...newQuestions,
+        {
+          id: newQuestions.length + 1,
+          question: newQuestion,
+          options: [],
+          answer: 0,
+          selectedAnswer: 0,
+        },
       ];
-      setQuestions(updatedQuestions);
+      setNewQuestions(updatedQuestions);
       localStorage.setItem('questions', JSON.stringify(updatedQuestions));
       setNewQuestion('');
     }
   };
 
   const deleteQuestion = (id: number) => {
-    const updatedQuestions: Question[] = questions.filter((q) => q.id !== id);
-    setQuestions(updatedQuestions);
+    const updatedQuestions: Question[] = newQuestions.filter((q) => q.id !== id);
+    setNewQuestions(updatedQuestions);
     localStorage.setItem('questions', JSON.stringify(updatedQuestions));
   };
 
@@ -72,4 +68,4 @@ const Questions: React.FC = () => {
   );
 };
 
-export default Questions;
+export default AdminQuestions;

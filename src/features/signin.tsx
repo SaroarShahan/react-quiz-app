@@ -1,16 +1,16 @@
-import React, { useState } from 'react';
+import { useContext } from 'react';
 import { useNavigate } from 'react-router';
 
 import Button from '~/components/Button';
+import { AppContext } from '~/context/appContext';
 
 const SignIn: React.FC = () => {
   const navigate = useNavigate();
-  const [userType, setUserType] = useState('');
+  const appState = useContext(AppContext);
 
   const handleLogin = (type: string) => {
-    setUserType(type);
-    console.log('hello');
-    navigate(type === 'admin' ? '/admin' : '/answers');
+    appState.handleUserType(type);
+    navigate(type === 'admin' ? '/questions' : '/answers');
   };
 
   return (

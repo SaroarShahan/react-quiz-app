@@ -1,20 +1,27 @@
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 
 import SignIn from '~/features/signin';
-import Admin from './features/admin';
-import Users from './features/users';
+import Questions from './features/questions';
+import Answers from './features/answers/index';
+import Layout from './layout/Layout';
+import Home from './features/home';
+import { AppContext } from './context/appContext';
+import useAppState from './hooks/useAppState';
 
 function App() {
+  const state = useAppState();
+
   return (
-    <Router>
-      <div className="App">
+    <AppContext.Provider value={{ ...state }}>
+      <Layout>
         <Routes>
-          <Route path="/" element={<SignIn />} />
-          <Route path="/admin" element={<Admin />} />
-          <Route path="/users" element={<Users />} />
+          <Route path="/" element={<Home />} />
+          <Route path="/signin" element={<SignIn />} />
+          <Route path="/questions" element={<Questions />} />
+          <Route path="/answers" element={<Answers />} />
         </Routes>
-      </div>
-    </Router>
+      </Layout>
+    </AppContext.Provider>
   );
 }
 
