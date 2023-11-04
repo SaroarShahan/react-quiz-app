@@ -36,7 +36,7 @@ yarn
 ### Start dev server
 
 ```bash
-yarn dev
+yarn start
 ```
 
 ### build
