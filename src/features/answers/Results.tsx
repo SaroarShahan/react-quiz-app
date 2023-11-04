@@ -25,7 +25,7 @@ const Results = () => {
           <div>
             <div className="w-full flex flex-col gap-y-6">
               {answers.map((answer, idx) => (
-                <QuestionCard key={answer.id} answer={answer} idx={idx} />
+                <QuestionCard key={answer.id} data={answer} idx={idx} />
               ))}
             </div>
 
@@ -45,7 +45,7 @@ const Results = () => {
           <div>
             <div className="w-full flex flex-col gap-y-6">
               {previousAnswers.map((answer, idx) => (
-                <QuestionCard key={answer.id} answer={answer} idx={idx} />
+                <QuestionCard key={answer.id} data={answer} idx={idx} />
               ))}
             </div>
           </div>
