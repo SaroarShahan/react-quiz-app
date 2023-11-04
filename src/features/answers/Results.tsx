@@ -7,7 +7,7 @@ import QuestionCard from '~/components/QuestionCard';
 import { AppContext } from '~/context/appContext';
 
 const Results = () => {
-  const { answers, previousAnswers, handleStateChange } = useContext(AppContext);
+  const { answers, previousAnswers, handleStateChange, userType } = useContext(AppContext);
 
   const handleEditSubmission = () => {
     handleStateChange(answers, 'previousAnswers');
@@ -36,21 +36,25 @@ const Results = () => {
         )}
       </Container>
 
-      <h2 className="max-w-md mx-auto mb-4 mt-8">Previous Answers:</h2>
+      {userType === 'user' && (
+        <>
+          <h2 className="max-w-md mx-auto mb-4 mt-8">Previous Answers:</h2>
 
-      <Container>
-        {!previousAnswers.length ? (
-          <NoData title="No Data available" />
-        ) : (
-          <div>
-            <div className="w-full flex flex-col gap-y-6">
-              {previousAnswers.map((answer, idx) => (
-                <QuestionCard key={answer.id} data={answer} idx={idx} />
-              ))}
-            </div>
-          </div>
-        )}
-      </Container>
+          <Container>
+            {!previousAnswers.length ? (
+              <NoData title="No Data available" />
+            ) : (
+              <div>
+                <div className="w-full flex flex-col gap-y-6">
+                  {previousAnswers.map((answer, idx) => (
+                    <QuestionCard key={answer.id} data={answer} idx={idx} />
+                  ))}
+                </div>
+              </div>
+            )}
+          </Container>
+        </>
+      )}
     </>
   );
 };

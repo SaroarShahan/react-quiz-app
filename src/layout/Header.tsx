@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, NavLink, useNavigate } from 'react-router-dom';
 
 import Button from '~/components/Button';
 import { AppContext } from '~/context/appContext';
@@ -20,6 +20,33 @@ const Header = () => {
           Quizer
         </h1>
       </Link>
+
+      <ul className="flex gap-4">
+        {userType === 'admin' && (
+          <li>
+            <NavLink
+              to="/questions"
+              className={({ isActive }) =>
+                isActive
+                  ? 'text-blue-500'
+                  : 'transition duration-300 ease-in-out hover:text-blue-500'
+              }
+            >
+              Question
+            </NavLink>
+          </li>
+        )}
+        <li>
+          <NavLink
+            to="/answers"
+            className={({ isActive }) =>
+              isActive ? 'text-blue-500' : 'transition duration-300 ease-in-out hover:text-blue-500'
+            }
+          >
+            Answers
+          </NavLink>
+        </li>
+      </ul>
 
       {userType ? (
         <Button onClick={handleLogout} className="cursor-pointer">
