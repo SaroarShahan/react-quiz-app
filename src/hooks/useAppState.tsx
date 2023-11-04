@@ -2,14 +2,16 @@ import { useEffect, useState } from 'react';
 
 import { quiz_data } from '~/data';
 
+const initState = {
+  userType: '',
+  showResult: false,
+  questions: [],
+  answers: [],
+  previousAnswers: [],
+};
+
 const useAppState = () => {
-  const [state, setState] = useState({
-    userType: '',
-    showResult: false,
-    questions: [],
-    answers: [],
-    previousAnswers: [],
-  });
+  const [state, setState] = useState({ ...initState });
 
   useEffect(() => {
     const localState = JSON.parse(localStorage.getItem('state')!);
@@ -19,26 +21,7 @@ const useAppState = () => {
       ...localState,
       questions: localState?.questions.length ? localState.questions : quiz_data,
     }));
-  }, []);
-
-  const handleUserType = (type: string) => {
-    if (!type) {
-      localStorage.removeItem('userType');
-      setState((prevState) => ({
-        ...prevState,
-        userType: '',
-      }));
-      localStorage.setItem('state', JSON.stringify({ ...state, userType: '' }));
-      return;
-    }
-
-    setState((prevState) => ({
-      ...prevState,
-      userType: type,
-    }));
-
-    localStorage.setItem('state', JSON.stringify({ ...state, userType: type }));
-  };
+  }, [state.userType]);
 
   const handleStateChange = (newState: Question[] | boolean | string, type: string) => {
     setState((prevState) => ({
@@ -49,7 +32,7 @@ const useAppState = () => {
     localStorage.setItem('state', JSON.stringify({ ...state, [type]: newState }));
   };
 
-  return { ...state, handleStateChange, handleUserType };
+  return { ...state, handleStateChange };
 };
 
 export default useAppState;

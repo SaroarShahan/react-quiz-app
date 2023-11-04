@@ -12,6 +12,5 @@ type AppContextProps = {
   questions: Question[];
   answers: Question[];
   previousAnswers: Question[];
-  handleUserType: (type: string) => void;
   handleStateChange: (newState: Question[] | boolean | string, type: string) => void;
 };

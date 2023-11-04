@@ -6,21 +6,23 @@ import { AppContext } from '~/context/appContext';
 
 const SignIn: React.FC = () => {
   const navigate = useNavigate();
-  const appState = useContext(AppContext);
+  const { handleStateChange } = useContext(AppContext);
 
-  const handleLogin = (type: string) => {
-    appState.handleUserType(type);
-    navigate(type === 'admin' ? '/questions' : '/answers');
+  const handleLogin = (user: string) => {
+    handleStateChange(user, 'userType');
+    navigate(user === 'admin' ? '/questions' : '/answers');
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen">
-      <h2 className="text-3xl font-bold mb-4">Sign In</h2>
+    <div className="max-w-md mx-auto flex items-center justify-center h-screen">
+      <div className="flex flex-col w-full border shadow-sm rounded px-6 py-8 text-center">
+        <h2 className="text-3xl font-bold mb-4">Sign In</h2>
 
-      <Button onClick={() => handleLogin('admin')} classNames="mb-2">
-        Login as Admin
-      </Button>
-      <Button onClick={() => handleLogin('user')}>Login as User</Button>
+        <Button onClick={() => handleLogin('admin')} classNames="mb-2">
+          Login as Admin
+        </Button>
+        <Button onClick={() => handleLogin('user')}>Login as User</Button>
+      </div>
     </div>
   );
 };

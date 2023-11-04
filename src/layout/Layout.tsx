@@ -1,8 +1,8 @@
-import { ReactNode, useEffect } from 'react';
+import { ReactNode, useContext, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import Header from './Header';
-import useAppState from '~/hooks/useAppState';
+import { AppContext } from '~/context/appContext';
 
 interface LayoutProps {
   children: ReactNode;
@@ -10,19 +10,19 @@ interface LayoutProps {
 
 const Layout = ({ children }: LayoutProps) => {
   const navigate = useNavigate();
-  const appState = useAppState();
+  const { userType } = useContext(AppContext);
 
   useEffect(() => {
-    if (!appState?.userType) {
+    if (!userType) {
       return navigate('/signin', { replace: true });
-    } else if (appState.userType === 'admin') {
+    } else if (userType === 'admin') {
       return navigate('/questions', { replace: true });
-    } else if (appState.userType === 'user') {
+    } else if (userType === 'user') {
       return navigate('/answers', { replace: true });
     }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [appState.userType]);
+  }, [userType]);
 
   return (
     <>

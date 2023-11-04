@@ -1,15 +1,16 @@
+import { useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
 import Button from '~/components/Button';
-import useAppState from '~/hooks/useAppState';
+import { AppContext } from '~/context/appContext';
 
 const Header = () => {
   const nagivate = useNavigate();
-  const appState = useAppState();
+  const { handleStateChange, userType } = useContext(AppContext);
 
   const handleLogout = () => {
-    appState.handleUserType('');
-    nagivate('/');
+    handleStateChange('', 'userType');
+    nagivate('/', { replace: true });
   };
 
   return (
@@ -20,7 +21,7 @@ const Header = () => {
         </h1>
       </Link>
 
-      {appState?.userType ? (
+      {userType ? (
         <Button onClick={handleLogout} className="cursor-pointer">
           Logout
         </Button>
