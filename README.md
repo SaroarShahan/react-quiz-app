@@ -4,14 +4,14 @@ This is a simple Quiz App built using React and TypeScript, where an admin can a
 view answers, and users can log in to answer the questions. The app utilizes Tailwind CSS for
 styling.
 
-# Features
+## Features
 
 - Admin can add and delete questions.
 - Users can answer questions.
 - Admin can view the answers provided by the users.
 - Previous answers are displayed for users.
 
-# Technologies Used
+## Technologies Used
 
 - React
 - TypeScript
