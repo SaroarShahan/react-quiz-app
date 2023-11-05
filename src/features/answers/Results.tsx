@@ -29,9 +29,11 @@ const Results = () => {
               ))}
             </div>
 
-            <Button onClick={handleEditSubmission} classNames="w-full mt-4">
-              Edit your submission
-            </Button>
+            {userType === 'user' && (
+              <Button onClick={handleEditSubmission} classNames="w-full mt-4">
+                Edit your submission
+              </Button>
+            )}
           </div>
         )}
       </Container>
