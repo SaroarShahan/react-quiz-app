@@ -15,7 +15,7 @@ const DeleteModalConfirmation = ({ isOpen, onClose, onClick }: DeleteModalConfir
         <Modal.CloseIcon onClose={onClose} />
       </Modal.Header>
       <Modal.Body className="flex justify-center gap-4">
-        <Button type="button" onClick={onClose} classNames="bg-red-500">
+        <Button type="button" onClick={onClose} className="bg-red-500">
           No
         </Button>
         <Button type="button" onClick={onClick}>

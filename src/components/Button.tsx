@@ -3,10 +3,10 @@ import clsx from 'clsx';
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   children: ReactNode;
-  classNames?: string;
+  className?: string;
 }
 
-const Button = ({ children, classNames = '', disabled, ...restProps }: ButtonProps) => {
+const Button = ({ children, className = '', disabled, ...restProps }: ButtonProps) => {
   return (
     <button
       {...restProps}
@@ -14,7 +14,7 @@ const Button = ({ children, classNames = '', disabled, ...restProps }: ButtonPro
       className={clsx(
         'bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded',
         disabled ? 'opacity-50 cursor-not-allowed' : '',
-        classNames,
+        className,
       )}
     >
       {children}

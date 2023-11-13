@@ -7,15 +7,12 @@ import Layout from '~/layout/Layout';
 import Home from '~/features/home';
 import { AppContext } from '~/context/appContext';
 import useAppState from '~/hooks/useAppState';
-import { useMemo } from 'react';
 
 function App() {
   const state = useAppState();
 
-  const memoizedState = useMemo(() => state, [state]);
-
   return (
-    <AppContext.Provider value={memoizedState}>
+    <AppContext.Provider value={state}>
       <Layout>
         <Routes>
           <Route path="/" element={<Home />} />

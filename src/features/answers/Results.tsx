@@ -30,7 +30,7 @@ const Results = () => {
             </div>
 
             {userType === 'user' && (
-              <Button onClick={handleEditSubmission} classNames="w-full mt-4">
+              <Button onClick={handleEditSubmission} className="w-full mt-4">
                 Edit your submission
               </Button>
             )}

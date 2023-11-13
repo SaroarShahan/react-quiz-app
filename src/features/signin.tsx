@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import React, { useContext } from 'react';
 import { useNavigate } from 'react-router';
 
 import Button from '~/components/Button';
@@ -18,7 +18,7 @@ const SignIn: React.FC = () => {
       <div className="flex flex-col w-full border shadow-sm rounded px-6 py-8 text-center">
         <h2 className="text-3xl font-bold mb-4">Sign In</h2>
 
-        <Button onClick={() => handleLogin('admin')} classNames="mb-2">
+        <Button onClick={() => handleLogin('admin')} className="mb-2">
           Login as Admin
         </Button>
         <Button onClick={() => handleLogin('user')}>Login as User</Button>

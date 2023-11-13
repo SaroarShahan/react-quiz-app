@@ -5,12 +5,40 @@ import Button from '~/components/Button';
 import { AppContext } from '~/context/appContext';
 
 const Header = () => {
-  const nagivate = useNavigate();
+  const navigate = useNavigate();
   const { handleStateChange, userType } = useContext(AppContext);
 
   const handleLogout = () => {
     handleStateChange('', 'userType');
-    nagivate('/', { replace: true });
+    navigate('/', { replace: true });
+  };
+
+  const renderAdminLinks = () => {
+    return (
+      <ul className="flex gap-4">
+        <li>
+          <NavLink
+            to="/questions"
+            className={({ isActive }) =>
+              isActive ? 'text-blue-500' : 'transition duration-300 ease-in-out hover:text-blue-500'
+            }
+          >
+            Question
+          </NavLink>
+        </li>
+
+        <li>
+          <NavLink
+            to="/answers"
+            className={({ isActive }) =>
+              isActive ? 'text-blue-500' : 'transition duration-300 ease-in-out hover:text-blue-500'
+            }
+          >
+            Answers
+          </NavLink>
+        </li>
+      </ul>
+    );
   };
 
   return (
@@ -19,35 +47,7 @@ const Header = () => {
         Quizer
       </h1>
 
-      {userType === 'admin' && (
-        <ul className="flex gap-4">
-          <li>
-            <NavLink
-              to="/questions"
-              className={({ isActive }) =>
-                isActive
-                  ? 'text-blue-500'
-                  : 'transition duration-300 ease-in-out hover:text-blue-500'
-              }
-            >
-              Question
-            </NavLink>
-          </li>
-
-          <li>
-            <NavLink
-              to="/answers"
-              className={({ isActive }) =>
-                isActive
-                  ? 'text-blue-500'
-                  : 'transition duration-300 ease-in-out hover:text-blue-500'
-              }
-            >
-              Answers
-            </NavLink>
-          </li>
-        </ul>
-      )}
+      {userType === 'admin' && renderAdminLinks()}
 
       {userType ? (
         <Button onClick={handleLogout} className="cursor-pointer">

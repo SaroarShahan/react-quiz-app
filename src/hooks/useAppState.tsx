@@ -11,10 +11,10 @@ const initState = {
 };
 
 const useAppState = () => {
-  const [state, setState] = useState({ ...initState });
+  const [state, setState] = useState(initState);
 
   useEffect(() => {
-    const localState = JSON.parse(localStorage.getItem('state')!);
+    const localState = JSON.parse(localStorage.getItem('state') || '{}');
 
     setState((prevState) => ({
       ...prevState,
@@ -24,12 +24,13 @@ const useAppState = () => {
   }, [state.userType]);
 
   const handleStateChange = (newState: Question[] | boolean | string, type: string) => {
+    const newStateObject = { [type]: newState };
     setState((prevState) => ({
       ...prevState,
-      [type]: newState,
+      ...newStateObject,
     }));
 
-    localStorage.setItem('state', JSON.stringify({ ...state, [type]: newState }));
+    localStorage.setItem('state', JSON.stringify({ ...state, ...newStateObject }));
   };
 
   return { ...state, handleStateChange };

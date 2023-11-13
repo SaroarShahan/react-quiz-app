@@ -14,7 +14,7 @@ const UserAnswers: React.FC = () => {
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [checkedOption, setCheckedOption] = useState(0);
   const [newAnswers, setNewAnswers] = useState<Question[]>([]);
-  const [modalToggle, setModalToggle] = useToggle(false);
+  const [modalToggle, setModalToggle] = useToggle();
 
   const handleQuestionNextChange = () => {
     setCurrentQuestion((prevState) => prevState + 1);

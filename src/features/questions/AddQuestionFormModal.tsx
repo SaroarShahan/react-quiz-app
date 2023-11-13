@@ -1,16 +1,8 @@
-import { ChangeEvent, FormEvent, useEffect, useState } from 'react';
+import React, { ChangeEvent, FormEvent, useEffect, useState } from 'react';
 
 import Modal from '~/components/Modal';
 import FormOption from './FormOption';
 import Button from '~/components/Button';
-
-interface AddQuestionFormModalProps {
-  isOpen: boolean;
-  isUpdate?: boolean;
-  selectedQuestion: Question | null;
-  onClose: () => void;
-  onSubmit: (data: QuestFormData) => void;
-}
 
 interface OptionProps {
   option1: string;
@@ -26,6 +18,14 @@ interface StateProps extends OptionProps {
   options: string[];
 }
 
+interface AddQuestionFormModalProps {
+  isOpen: boolean;
+  isUpdate?: boolean;
+  selectedQuestion: Question | null;
+  onClose: () => void;
+  onSubmit: (data: QuestFormData) => void;
+}
+
 const initState = {
   question: '',
   options: [],
@@ -37,14 +37,14 @@ const initState = {
   option4: '',
 };
 
-const AddQuestionFormModal = ({
+const AddQuestionFormModal: React.FC<AddQuestionFormModalProps> = ({
   isOpen,
   isUpdate = false,
   selectedQuestion,
   onClose,
   onSubmit,
 }: AddQuestionFormModalProps) => {
-  const [state, setState] = useState<StateProps>({ ...initState });
+  const [state, setState] = useState<StateProps>(initState);
   const isValid =
     !!state.question &&
     !!state.answer &&

@@ -13,12 +13,15 @@ const Layout = ({ children }: LayoutProps) => {
   const { userType } = useContext(AppContext);
 
   useEffect(() => {
-    if (!userType) {
-      return navigate('/signin', { replace: true });
-    } else if (userType === 'admin') {
-      return navigate('/questions', { replace: true });
-    } else if (userType === 'user') {
-      return navigate('/answers', { replace: true });
+    switch (userType) {
+      case 'admin':
+        navigate('/questions', { replace: true });
+        break;
+      case 'user':
+        navigate('/answers', { replace: true });
+        break;
+      default:
+        navigate('/signin', { replace: true });
     }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
